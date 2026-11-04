@@ -21,6 +21,9 @@ function App() {
         }
 
         const data = await response.json();
+        if (!Array.isArray(data)) {
+          throw new Error("La respuesta no contiene una lista de alumnos.");
+        }
         setStudents(data);
       } catch (err) {
         if (err.name !== "AbortError") {
@@ -42,7 +45,7 @@ function App() {
     <main>
       <h1>Listado de alumnos</h1>
 
-      {loading && <p>Cargando alumnos...</p>}
+      {loading && <p role="status">Cargando alumnos...</p>}
 
       {error && <p role="alert">{error}</p>}
 
@@ -53,25 +56,27 @@ function App() {
           {students.length === 0 ? (
             <p>No hay alumnos registrados.</p>
           ) : (
-            <table>
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Matrícula</th>
-                  <th>Nombre</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {students.map((student) => (
-                  <tr key={student.id}>
-                    <td>{student.id}</td>
-                    <td>{student.matricula}</td>
-                    <td>{student.nombre}</td>
+            <div className="table-container">
+              <table>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Nombre</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {students.map((student) => (
+                    <tr key={student.id}>
+                      <td>{student.id}</td>
+                      <td>{student.matricula}</td>
+                      <td>{student.nombre}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           )}
         </>
       )}

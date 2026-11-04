@@ -1,16 +1,26 @@
-# React + Vite
+# Frontend Unitech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React con Vite que consulta `GET /students` y muestra estados de carga, error y lista vacía.
 
-Currently, two official plugins are available:
+## Ejecutar localmente
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Requisitos: Node.js 24 y npm. Desde este directorio:
 
-## React Compiler
+```bash
+npm ci
+cp .env.example .env
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Configura `VITE_API_URL` en `.env` con la URL base del backend, por ejemplo `http://127.0.0.1:8000`. No agregues `/students` ni credenciales. Reinicia Vite después de cambiarla.
 
-## Expanding the ESLint configuration
+## Validar y compilar
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm run lint
+npm run build
+```
+
+La compilación comprueba que `VITE_API_URL` exista y sea una URL HTTP o HTTPS válida. Genera los archivos de producción en `dist`.
+
+Consulta el [README principal](../README.md) para configurar la base de datos, ejecutar las migraciones y desplegar el proyecto.
