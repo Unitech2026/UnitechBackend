@@ -10,7 +10,15 @@ from database import get_engine
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Unitech - Alumnos")
+from fastapi.middleware.cors import CORSMiddleware
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=False,
+    allow_methods=["GET"],
+    allow_headers=["*"],
+)
 
 class Student(BaseModel):
     id: int
